@@ -35,8 +35,6 @@ import com.android.systemui.biometrics.UdfpsHbmTypes.HbmType
 
 private const val TAG = "UdfpsView"
 private const val SETTING_HBM_TYPE = "com.android.systemui.biometrics.UdfpsSurfaceView.hbmType"
-@HbmType
-private const val DEFAULT_HBM_TYPE = UdfpsHbmTypes.LOCAL_HBM
 
 /**
  * A view containing 1) A SurfaceView for HBM, and 2) A normal drawable view for all other
@@ -74,11 +72,11 @@ class UdfpsView(
         Settings.Secure.getIntForUser(
             context.contentResolver,
             SETTING_HBM_TYPE,
-            DEFAULT_HBM_TYPE,
+            context.resources.getInteger(R.integer.config_udfpsHbmType),
             UserHandle.USER_CURRENT
         )
     } else {
-        DEFAULT_HBM_TYPE
+        context.resources.getInteger(R.integer.config_udfpsHbmType)
     }
 
     // Only used for UdfpsHbmTypes.GLOBAL_HBM.
